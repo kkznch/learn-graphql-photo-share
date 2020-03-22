@@ -33,13 +33,20 @@ async function authorizeWithGithub(credentials) {
 }
 
 module.exports = {
-  postPhoto(parent, args) {
-    let newPhoto = {
-      id: _id++,
+  async postPhoto(parent, args, { db, currentUser }) {
+    if (!currentUser) {
+      throw new Error('Only an authorized user can post a photo.');
+    }
+
+    const newPhoto = {
       ...args.input,
-      created: new Date()
+      userID: currentUser.githubLogin,
+      created: new Date(),
     };
-    photos.push(newPhoto);
+
+    const { insertedIds } = await db.collection('photos').insert(newPhoto);
+    newPhoto.id = insertedIds[0];
+
     return newPhoto;
   },
   async githubAuth(parent, { code }, { db }) {
@@ -66,7 +73,9 @@ module.exports = {
       avatar: avatar_url,
     };
 
-    const { ops: [user] } = await db.collection('users').replaceOne({ githubLogin: login }, latestUserInfo, { upsert: true })
+    const { ops: [user] } = await db
+      .collection('users')
+      .replaceOne({ githubLogin: login }, latestUserInfo, { upsert: true });
 
     return { user, token: access_token };
   }

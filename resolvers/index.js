@@ -6,4 +6,4 @@ module.exports = {
   Query,
   Mutation,
   ...Type
-}
+};
