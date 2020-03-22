@@ -19,7 +19,6 @@ async function start() {
     }
   );
   const db = client.db();
-  const context = { db };
 
   const app = express();
   const server = new ApolloServer({
