@@ -1,0 +1,27 @@
+{
+  "name": "learn-graphql-photo-share",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e js,json,graphql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkznch/learn-graphql-photo-share.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkznch/learn-graphql-photo-share/issues"
+  },
+  "homepage": "https://github.com/kkznch/learn-graphql-photo-share#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.11.0",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "graphql-playground-middleware-express": "^1.7.12",
+    "nodemon": "^2.0.2"
+  }
+}
